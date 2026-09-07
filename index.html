@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Hangman Myanmar Edition - An interactive word guessing game featuring iconic Myanmar food, landmarks, culture, festivals, and fan favorites in English with live Supabase Leaderboard and User Profiles.">
+  <meta name="theme-color" content="#090d16">
+  <title>Hangman: Myanmar Edition | Word Guessing Game</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪢</text></svg>">
+  
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow ambient-1"></div>
+  <div class="ambient-glow ambient-2"></div>
+
+  <!-- Confetti canvas for victory animation -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Header Area -->
+    <header>
+      <div class="top-bar">
+        <div class="logo-area">
+          <div class="logo-icon">🪢</div>
+          <div class="logo-text">
+            <h1>HANGMAN <span class="badge-tag">Myanmar Edition</span></h1>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <!-- Guest Free Trial Badge -->
+          <span id="trial-badge" class="trial-tag" style="display: none;">
+            🎮 Free Trial: <strong id="trial-count-text">3</strong> left
+          </span>
+
+          <!-- Leaderboard Button -->
+          <button id="leaderboard-btn" class="nav-action-btn" title="Global Leaderboard" aria-label="Global Leaderboard">
+            <span class="btn-icon">🏆</span>
+            <span class="btn-text">Leaderboard</span>
+          </button>
+
+          <!-- Auth / Profile Button -->
+          <button id="auth-profile-btn" class="nav-action-btn auth-btn" title="Player Profile / Login" aria-label="Player Profile / Login">
+            <span id="user-avatar-icon" class="btn-icon">👤</span>
+            <span id="user-display-name" class="btn-text">Sign In</span>
+          </button>
+
+          <!-- Sound Button -->
+          <button id="sound-btn" class="icon-btn" title="Toggle Sound" aria-label="Toggle Sound">
+            <span id="sound-icon">🔊</span>
+          </button>
+
+          <!-- Info Button -->
+          <button id="info-btn" class="icon-btn" title="How to Play" aria-label="How to Play">
+            <span>ℹ️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats HUD Ribbon -->
+      <div class="stats-ribbon">
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-info">
+            <span class="stat-label">Current Streak</span>
+            <span id="streak-val" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-info">
+            <span class="stat-label">Best Streak</span>
+            <span id="best-streak-val" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-info">
+            <span class="stat-label">Total Score</span>
+            <span id="score-val" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-info">
+            <span class="stat-label">Win Rate</span>
+            <span id="winrate-val" class="stat-value">0%</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="selectors-group">
+        <div class="select-wrapper">
+          <label for="category-select">Topic:</label>
+          <select id="category-select">
+            <option value="all">🌟 All Categories</option>
+            <option value="food">🍲 Myanmar Food & Snacks</option>
+            <option value="places">🏛️ Places & Landmarks</option>
+            <option value="culture">🌺 Culture & Festivals</option>
+            <option value="nature">💎 Nature & Gems</option>
+            <option value="favorites">⚽ Fan Favorites (Football & Gaming)</option>
+            <option value="tech">💻 Tech & Modern Life</option>
+          </select>
+        </div>
+
+        <div class="select-wrapper">
+          <label for="difficulty-select">Difficulty:</label>
+          <select id="difficulty-select">
+            <option value="easy">🟢 Easy (8 Lives + Free Hint)</option>
+            <option value="medium" selected>🟡 Medium (6 Lives)</option>
+            <option value="hard">🔴 Hard (5 Lives)</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="new-game-btn" class="btn-primary">
+        <span>⚡</span> New Word
+      </button>
+    </div>
+
+    <!-- Main Game Stage -->
+    <main class="game-stage">
+      <!-- Left: Hangman SVG Stage -->
+      <section class="stage-visual">
+        <div class="visual-header">
+          <div class="lives-indicator">
+            <span class="heart-icon">❤️</span>
+            <span class="lives-count-text">Lives: <span id="lives-left">6</span>/<span id="max-lives">6</span></span>
+          </div>
+
+          <div id="strikes-bar" class="strikes-bar">
+            <!-- Strike dots dynamically injected -->
+          </div>
+        </div>
+
+        <div class="svg-canvas-wrapper">
+          <svg id="hangman-svg" class="hangman-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Permanent Gallows Structure -->
+            <line x1="20" y1="225" x2="180" y2="225" class="gallows-element gallows-base" />
+            <line x1="50" y1="225" x2="50" y2="20" class="gallows-element" />
+            <line x1="48" y1="20" x2="140" y2="20" class="gallows-element" />
+            <line x1="50" y1="60" x2="90" y2="20" class="gallows-element" />
+            <line x1="140" y1="20" x2="140" y2="55" class="rope-element" />
+
+            <!-- Character Parts (Revealed step-by-step) -->
+            <!-- 1. Head -->
+            <circle id="part-head" cx="140" cy="75" r="20" class="body-part" />
+            
+            <!-- Facial Expressions -->
+            <!-- Normal Eyes -->
+            <circle id="part-eye-left" cx="134" cy="72" r="2" fill="#38bdf8" class="face-element" />
+            <circle id="part-eye-right" cx="146" cy="72" r="2" fill="#38bdf8" class="face-element" />
+            <!-- Dead Eyes (X_X) -->
+            <path id="part-dead-eyes" d="M131 70 L137 76 M137 70 L131 76 M143 70 L149 76 M149 70 L143 76" stroke="#ef4444" stroke-width="2" class="face-element" style="display:none;" />
+            <!-- Mouth -->
+            <path id="part-mouth" d="M135 84 Q140 80 145 84" class="face-element" />
+
+            <!-- 2. Torso -->
+            <line id="part-torso" x1="140" y1="95" x2="140" y2="155" class="body-part" />
+
+            <!-- 3. Left Arm -->
+            <line id="part-left-arm" x1="140" y1="110" x2="110" y2="135" class="body-part" />
+
+            <!-- 4. Right Arm -->
+            <line id="part-right-arm" x1="140" y1="110" x2="170" y2="135" class="body-part" />
+
+            <!-- 5. Left Leg -->
+            <line id="part-left-leg" x1="140" y1="155" x2="115" y2="200" class="body-part" />
+
+            <!-- 6. Right Leg -->
+            <line id="part-right-leg" x1="140" y1="155" x2="165" y2="200" class="body-part" />
+
+            <!-- Extra Parts for Easy Mode (8 lives) -->
+            <!-- 7. Left Hand Accent -->
+            <circle id="part-left-hand" cx="108" cy="137" r="3.5" class="body-part" fill="#38bdf8" />
+            <!-- 8. Right Hand Accent -->
+            <circle id="part-right-hand" cx="172" cy="137" r="3.5" class="body-part" fill="#38bdf8" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- Right: Word Slots & Interactive Play -->
+      <section class="stage-interactive">
+        <div class="category-banner">
+          <span id="current-category-badge" class="category-badge">
+            <span id="badge-icon">🍲</span>
+            <span id="badge-text">Myanmar Food & Snacks</span>
+          </span>
+
+          <span id="diff-pill" class="difficulty-badge diff-medium">Medium</span>
+        </div>
+
+        <!-- Word Blanks Display -->
+        <div class="word-display-area">
+          <div id="word-phrase" class="word-phrase">
+            <!-- Word letter slots dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Clue / Hint Box -->
+        <div class="hint-box">
+          <div class="hint-content">
+            <span class="hint-icon">💡</span>
+            <span id="hint-text">Click 'Show Hint' if you need a clue about this word!</span>
+          </div>
+          <button id="hint-btn" class="btn-hint">Show Hint</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Virtual On-Screen Keyboard -->
+    <section class="keyboard-section" aria-label="Virtual Keyboard">
+      <div class="keyboard-row" id="kb-row-1"></div>
+      <div class="keyboard-row" id="kb-row-2"></div>
+      <div class="keyboard-row" id="kb-row-3"></div>
+    </section>
+  </div>
+
+  <!-- Game Over / Victory Modal -->
+  <div id="game-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div id="modal-card" class="modal-card modal-win">
+      <div id="modal-icon" class="modal-icon-badge">🎉</div>
+      <h2 id="modal-title" class="modal-title">VICTORY!</h2>
+
+      <div class="modal-word-reveal">
+        <div class="modal-word-label">The Word Was:</div>
+        <div id="modal-word" class="modal-word-text">MOHINGA</div>
+        <div id="modal-meaning" class="modal-meaning-text"></div>
+      </div>
+
+      <div class="modal-stats-row">
+        <div class="modal-stat-item">
+          <span id="modal-streak" class="val">+1</span>
+          <span class="lbl">Streak</span>
+        </div>
+        <div class="modal-stat-item">
+          <span id="modal-score" class="val">+100</span>
+          <span class="lbl">Score</span>
+        </div>
+        <div class="modal-stat-item">
+          <span id="modal-lives-left" class="val">4/6</span>
+          <span class="lbl">Lives Left</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="modal-next-btn" class="btn-modal-next">Next Word (Spacebar)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info / How to Play Modal -->
+  <div id="info-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card info-modal-card">
+      <h2>🪢 How to Play Hangman</h2>
+      <div class="info-list">
+        <p>🇲🇲 <strong>Myanmar Edition</strong> features iconic Myanmar food, landmarks, cultural items, festivals, and fan favorites (football, gaming) spelled in English.</p>
+        <p>🎮 <strong>Free Trial</strong>: Guests can play up to 3 games for free! After 3 games, create a free account to continue playing and save your high scores.</p>
+        <p>⌨️ <strong>Guessing</strong>: Type letters on your keyboard or tap the on-screen buttons.</p>
+        <p>💡 <strong>Hints</strong>: Click <em>Show Hint</em> to get an English clue about the item.</p>
+        <p>🏆 <strong>Leaderboard</strong>: Sign in to save your Best Streaks and compete on the Global Leaderboard!</p>
+      </div>
+      <div class="modal-actions" style="margin-top: 1rem;">
+        <button id="close-info-btn" class="btn-modal-next">Got it, Let's Play!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Sign In / Sign Up) -->
+  <div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card auth-modal-card">
+      <div class="auth-header">
+        <div class="auth-icon-badge">🔐</div>
+        <h2 id="auth-title">Welcome Player</h2>
+        <p id="auth-subtitle" class="auth-subtitle">Sign in to sync your score and climb the Leaderboard</p>
+      </div>
+
+      <!-- Free Trial Limit Alert -->
+      <div id="trial-limit-notice" class="trial-limit-alert" style="display: none;">
+        ⚠️ <strong>Free Trial Limit Reached (3/3 games)</strong><br>
+        Please register or sign in to continue playing Hangman!
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <button id="tab-signin" class="auth-tab active">Sign In</button>
+        <button id="tab-signup" class="auth-tab">Create Account</button>
+      </div>
+
+      <div id="auth-error-alert" class="auth-alert" style="display:none;"></div>
+
+      <form id="auth-form" class="auth-form">
+        <div id="username-group" class="form-group" style="display: none;">
+          <label for="auth-username">Player Username</label>
+          <input type="text" id="auth-username" placeholder="e.g. AungAung99" autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="auth-email">Username or Email</label>
+          <input type="text" id="auth-email" placeholder="e.g. MgMg or player@example.com" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="btn-primary auth-submit-btn">
+          <span>🚀</span> Sign In
+        </button>
+      </form>
+
+      <div class="modal-actions" id="guest-action-wrapper">
+        <button id="close-auth-btn" class="btn-secondary">Play as Guest</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Profile Modal -->
+  <div id="profile-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card profile-modal-card">
+      <div class="profile-header">
+        <div id="profile-avatar" class="profile-avatar">👤</div>
+        <div class="profile-meta">
+          <h2 id="profile-username">Player</h2>
+          <span id="profile-email" class="profile-email">player@email.com</span>
+        </div>
+      </div>
+
+      <div class="profile-stats-grid">
+        <div class="profile-stat-box">
+          <span class="stat-icon">⭐</span>
+          <div class="stat-details">
+            <span class="lbl">Total Score</span>
+            <span id="prof-score" class="val">0</span>
+          </div>
+        </div>
+
+        <div class="profile-stat-box">
+          <span class="stat-icon">🏆</span>
+          <div class="stat-details">
+            <span class="lbl">Best Streak</span>
+            <span id="prof-best-streak" class="val">0</span>
+          </div>
+        </div>
+
+        <div class="profile-stat-box">
+          <span class="stat-icon">🔥</span>
+          <div class="stat-details">
+            <span class="lbl">Current Streak</span>
+            <span id="prof-streak" class="val">0</span>
+          </div>
+        </div>
+
+        <div class="profile-stat-box">
+          <span class="stat-icon">🏅</span>
+          <div class="stat-details">
+            <span class="lbl">Games Won</span>
+            <span id="prof-won" class="val">0</span>
+          </div>
+        </div>
+
+        <div class="profile-stat-box">
+          <span class="stat-icon">🎮</span>
+          <div class="stat-details">
+            <span class="lbl">Games Played</span>
+            <span id="prof-played" class="val">0</span>
+          </div>
+        </div>
+
+        <div class="profile-stat-box">
+          <span class="stat-icon">🎯</span>
+          <div class="stat-details">
+            <span class="lbl">Win Rate</span>
+            <span id="prof-winrate" class="val">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="logout-btn" class="btn-danger">Sign Out</button>
+        <button id="close-profile-btn" class="btn-primary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Leaderboard Modal -->
+  <div id="leaderboard-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card leaderboard-modal-card">
+      <div class="lb-header">
+        <div class="lb-title-wrap">
+          <span class="lb-trophy">🏆</span>
+          <h2>Global Leaderboard</h2>
+        </div>
+        <button id="refresh-lb-btn" class="icon-btn" title="Refresh Rankings">🔄</button>
+      </div>
+
+      <p class="lb-subtitle">Top players ranked by Best Streak and Total Score</p>
+
+      <div class="lb-table-container">
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Best Streak</th>
+              <th>Score</th>
+              <th>Won</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-tbody">
+            <tr>
+              <td colspan="5" style="text-align:center; padding: 2rem; color: var(--text-muted);">
+                Loading rankings...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button id="close-lb-btn" class="btn-primary">Back to Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="words.js"></script>
+  <script src="audio.js"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
