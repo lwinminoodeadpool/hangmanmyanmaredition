@@ -541,7 +541,11 @@ class HangmanGame {
       audio.playWrong();
     } finally {
       this.dom.authSubmitBtn.disabled = false;
-      this.setAuthMode(this.authMode);
+      if (this.authMode === "signin") {
+        this.dom.authSubmitBtn.innerHTML = `<span>🚀</span> Sign In`;
+      } else {
+        this.dom.authSubmitBtn.innerHTML = `<span>✨</span> Register & Play`;
+      }
     }
   }
 

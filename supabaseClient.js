@@ -46,13 +46,21 @@ class AuthManager {
     });
 
     if (error) {
-      if (error.message && error.message.toLowerCase().includes("user already registered")) {
-        throw new Error("This username/email is already registered. Please Sign In instead.");
+      const msg = error.message || error.error_description || "";
+      if (msg.toLowerCase().includes("user already registered") || msg.toLowerCase().includes("already registered") || msg.toLowerCase().includes("user_already_exists")) {
+        throw new Error("This username/email is already registered! Please switch to Sign In.");
+      }
+      if (msg.toLowerCase().includes("rate limit") || msg.toLowerCase().includes("over_email_send_rate_limit")) {
+        throw new Error("Email rate limit exceeded. Please turn off 'Confirm email' in Supabase Auth -> Providers -> Email for instant registration.");
       }
       throw error;
     }
 
     if (data && data.user) {
+      // Supabase email enumeration protection returns empty identities array if user exists
+      if (Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        throw new Error("This account already exists! Please switch to the Sign In tab.");
+      }
       this.currentUser = data.user;
       await this.ensureProfile(data.user.id, finalUsername);
       await this.fetchProfile(data.user.id);
