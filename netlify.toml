@@ -2,6 +2,13 @@
 [build]
   publish = "."
 
+# Supabase Reverse Proxy to bypass ISP and firewall blocks in Myanmar & worldwide
+[[redirects]]
+  from = "/supabase/*"
+  to = "https://prqwwuxfpynmzdvaoesh.supabase.co/:splat"
+  status = 200
+  force = true
+
 # Recommended HTTP security headers
 [[headers]]
   for = "/*"

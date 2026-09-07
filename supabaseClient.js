@@ -1,6 +1,23 @@
 // Supabase Client & Backend Authentication Manager
-const SUPABASE_URL = (window.HANGMAN_CONFIG && window.HANGMAN_CONFIG.SUPABASE_URL) || "https://prqwwuxfpynmzdvaoesh.supabase.co";
-const SUPABASE_ANON_KEY = (window.HANGMAN_CONFIG && window.HANGMAN_CONFIG.SUPABASE_ANON_KEY) || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycXd3dXhmcHlubXpkdmFvZXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1MDA5OTEsImV4cCI6MjEwNDA3Njk5MX0.WN4q3SdsDSmKvLXckTyhgDwNBawNSVtqvWIJjsbS3BE";
+function getSupabaseUrl() {
+  if (typeof window !== "undefined" && window.HANGMAN_CONFIG && window.HANGMAN_CONFIG.SUPABASE_URL) {
+    return window.HANGMAN_CONFIG.SUPABASE_URL;
+  }
+  // When hosted on Netlify or a public server, route through the same-origin reverse proxy (/supabase)
+  // This bypasses ISP firewalls, DNS blocks, and network throttling in Myanmar and elsewhere without VPN.
+  if (typeof window !== "undefined" && window.location && window.location.origin) {
+    const isLocalhost = window.location.hostname === "localhost" || 
+                        window.location.hostname === "127.0.0.1" || 
+                        window.location.protocol === "file:";
+    if (!isLocalhost) {
+      return `${window.location.origin}/supabase`;
+    }
+  }
+  return "https://prqwwuxfpynmzdvaoesh.supabase.co";
+}
+
+const SUPABASE_URL = getSupabaseUrl();
+const SUPABASE_ANON_KEY = (typeof window !== "undefined" && window.HANGMAN_CONFIG && window.HANGMAN_CONFIG.SUPABASE_ANON_KEY) || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycXd3dXhmcHlubXpkdmFvZXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1MDA5OTEsImV4cCI6MjEwNDA3Njk5MX0.WN4q3SdsDSmKvLXckTyhgDwNBawNSVtqvWIJjsbS3BE";
 
 class AuthManager {
   constructor() {
@@ -12,8 +29,9 @@ class AuthManager {
   // Robust Supabase Client Getter
   get client() {
     if (!this._client) {
-      if (window.supabase && typeof window.supabase.createClient === "function") {
-        this._client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const supa = (typeof window !== "undefined" && window.supabase) || (typeof supabase !== "undefined" ? supabase : null);
+      if (supa && typeof supa.createClient === "function") {
+        this._client = supa.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
     }
     return this._client;
