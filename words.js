@@ -242,7 +242,7 @@ const WORD_BANK = [
     difficulty: "easy"
   },
   {
-    word: "KENGTUNG",
+    word: "KYAING TONG",
     category: "places",
     categoryName: "🏛️ Places & Landmarks",
     hint: "Principal town of eastern Shan State known for historic Buddhist monasteries and vibrant tribal markets.",
@@ -555,6 +555,218 @@ const WORD_BANK = [
     category: "tech",
     categoryName: "💻 Tech & Modern Life",
     hint: "Widely used mobile wallet application run by Myanmar's largest private commercial bank.",
+    difficulty: "easy"
+  },
+  // ==================== MORE MYANMAR FOOD & SNACKS ====================
+  {
+    word: "MEESHAY",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Shan-origin specialty of rice noodles mixed with meat sauce, fermented bean paste, and pickled radish.",
+    difficulty: "easy"
+  },
+  {
+    word: "MON HINGAR",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Alternative traditional phonetic spelling for the famous national catfish noodle breakfast.",
+    difficulty: "medium"
+  },
+  {
+    word: "BAIA GYAW",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Crispy, savory deep-fried yellow split-pea fritters seasoned with onions and mint leaves.",
+    difficulty: "medium"
+  },
+  {
+    word: "MONT LONE YAY PAW",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Boiled glutinous rice balls stuffed with palm jaggery, traditionally shared during Thingyan.",
+    difficulty: "hard"
+  },
+  {
+    word: "WET THA DOKE HTOE",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Beloved street-cart pork skewers simmered in light soy broth, dipped into spicy chili sauce.",
+    difficulty: "hard"
+  },
+  {
+    word: "KHAUK SWE THOKE",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Tossed wheat noodle salad seasoned with garlic oil, chili flakes, chickpea flour, and tamarind.",
+    difficulty: "medium"
+  },
+  {
+    word: "HALAWA",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Rich, sticky sweet confection from Pathein made of sticky rice, coconut milk, and poppy seeds.",
+    difficulty: "easy"
+  },
+
+  // ==================== MORE FAMOUS PLACES & LANDMARKS ====================
+  {
+    word: "HPA AN",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Picturesque capital of Kayin State famous for dramatic limestone karst mountains and sacred caves.",
+    difficulty: "easy"
+  },
+  {
+    word: "SADDAN CAVE",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Colossal limestone cavern near Hpa-An leading to a hidden lake navigated by wooden dugouts.",
+    difficulty: "medium"
+  },
+  {
+    word: "PO WIN TAUNG",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Ancient sandstone cave monastery near Monywa featuring hundreds of carved Buddhas and murals.",
+    difficulty: "hard"
+  },
+  {
+    word: "MINGUN PAHTODAWGYI",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Monumental, uncompleted massive brick stupa on the Ayeyarwady River cracked by historic earthquakes.",
+    difficulty: "hard"
+  },
+  {
+    word: "GOKTEIK VIADUCT",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Stunning colonial-era railway trestle spanning a deep gorge between Mandalay and Lashio.",
+    difficulty: "hard"
+  },
+  {
+    word: "NAT MA TAUNG",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Also called Mount Victoria, the highest peak in Chin State, known for endemic birds and rhododendrons.",
+    difficulty: "medium"
+  },
+  {
+    word: "SULE PAGODA",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Octagonal golden stupa serving as the vibrant traffic circle and central landmark of downtown Yangon.",
+    difficulty: "easy"
+  },
+
+  // ==================== MORE CULTURE, TRADITIONS & FESTIVALS ====================
+  {
+    word: "KYAUK PYIN",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Round, grooved circular stone slab used with a splash of water to grind bark into Thanaka paste.",
+    difficulty: "medium"
+  },
+  {
+    word: "NAT KADAW",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Traditional spiritual medium or spirit dancer central to Taungbyone and other Nat festivals.",
+    difficulty: "hard"
+  },
+  {
+    word: "YEIN",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Traditional Burmese synchronized group dance performed by troupes during the Thingyan festival.",
+    difficulty: "easy"
+  },
+  {
+    word: "ANANYO",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Sacred concept of gratitude and deep reverence toward the 'Five Infinite Venerables' (Buddha, Dhamma, Sangha, Parents, Teachers).",
+    difficulty: "hard"
+  },
+  {
+    word: "PWE",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Open-air overnight theatrical performance combining traditional opera, comedy sketches, and dance.",
+    difficulty: "easy"
+  },
+  {
+    word: "LALOKE",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Handmade cylindrical lacquerware container traditionally used to carry betel nuts or offering food.",
+    difficulty: "medium"
+  },
+
+  // ==================== MORE NATURE, GEMS & WILDLIFE ====================
+  {
+    word: "INNDAWGYI LAKE",
+    category: "nature",
+    categoryName: "💎 Nature, Gems & Wildlife",
+    hint: "Largest natural freshwater lake in Myanmar and a UNESCO biosphere reserve in Kachin State.",
+    difficulty: "hard"
+  },
+  {
+    word: "PERIDOT",
+    category: "nature",
+    categoryName: "💎 Nature, Gems & Wildlife",
+    hint: "Vibrant olive-green gemstone mined in great size and clarity from the Bernardmyo hills near Mogok.",
+    difficulty: "medium"
+  },
+  {
+    word: "SPINEL",
+    category: "nature",
+    categoryName: "💎 Nature, Gems & Wildlife",
+    hint: "Brilliant, multi-colored precious gemstone commonly found alongside rubies and sapphires in Mogok.",
+    difficulty: "medium"
+  },
+  {
+    word: "TAKHI",
+    category: "nature",
+    categoryName: "💎 Nature, Gems & Wildlife",
+    hint: "The rare Burmese star tortoise, an endemic and critically endangered species found in the central dry zone.",
+    difficulty: "hard"
+  },
+
+  // ==================== MORE PASSIONS, DRINKS & POP CULTURE ====================
+  {
+    word: "LETHWEI",
+    category: "favorites",
+    categoryName: "⚽ Sports & Passions",
+    hint: "Myanmar's bare-knuckle traditional boxing art, known as the 'art of nine limbs' including headbutts.",
+    difficulty: "easy"
+  },
+  {
+    word: "KYA SEINT",
+    category: "favorites",
+    categoryName: "☕ Drinks & Tea Culture",
+    hint: "Classic Myanmar tea shop formula indicating an extra-strong tea base with rich, creamy milk.",
+    difficulty: "medium"
+  },
+  {
+    word: "AUNG LA N SANG",
+    category: "favorites",
+    categoryName: "⚽ Sports & Passions",
+    hint: "Kachin-born MMA mixed martial arts superstar known nationally as 'The Burmese Python'.",
+    difficulty: "hard"
+  },
+  {
+    word: "MANDALAY BEER",
+    category: "favorites",
+    categoryName: "⚽ Sports & Passions",
+    hint: "Historic local beer brand originally established during the British colonial era in 1886.",
+    difficulty: "medium"
+  },
+  {
+    word: "PLASTIC BALL",
+    category: "favorites",
+    categoryName: "⚽ Sports & Passions",
+    hint: "Inexpensive red-striped or light toy balls kicked by kids barefoot in alleyways after school.",
     difficulty: "easy"
   }
 ];
