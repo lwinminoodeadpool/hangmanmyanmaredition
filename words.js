@@ -1,4 +1,4 @@
-// Rich Word Bank of Myanmar Cultural Favorites, Food, Landmarks, Traditions, and Passions (in English)
+// Cleaned & Verified Word Bank for Hangman: Myanmar Edition
 const WORD_BANK = [
   // ==================== 1. MYANMAR FOOD & SNACKS ====================
   {
@@ -75,14 +75,14 @@ const WORD_BANK = [
     word: "MON PYIT THALET",
     category: "food",
     categoryName: "🍲 Myanmar Food & Snacks",
-    hint: "Myanmar style savory pancake made with rice flour batter, scallions, and palm sugar or peas.",
+    hint: "Myanmar-style savory pancake made with rice flour batter, scallions, and palm sugar or peas.",
     difficulty: "hard"
   },
   {
     word: "SHWE TAUNG KHAUK SWE",
     category: "food",
     categoryName: "🍲 Myanmar Food & Snacks",
-    hint: "Famous Shan-style or Bamar-style egg noodles served with creamy chicken and crispy wontons.",
+    hint: "Egg noodles served with creamy chicken coconut curry sauce and crispy wontons.",
     difficulty: "hard"
   },
   {
@@ -105,6 +105,20 @@ const WORD_BANK = [
     categoryName: "🍲 Myanmar Food & Snacks",
     hint: "Special festival food made by stirring sticky rice with ginger, coconut slices, sesame, and groundnuts.",
     difficulty: "medium"
+  },
+  {
+    word: "NGA HTAMIN",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Popular Shan dish of fragrant turmeric-infused rice kneaded with flaked freshwater fish and garlic oil.",
+    difficulty: "medium"
+  },
+  {
+    word: "KHAO POAT",
+    category: "food",
+    categoryName: "🍲 Myanmar Food & Snacks",
+    hint: "Traditional Shan fragrant black glutinous rice cakes pounded with roasted sesame and grilled.",
+    difficulty: "hard"
   },
 
   // ==================== 2. FAMOUS PLACES & LANDMARKS ====================
@@ -206,6 +220,48 @@ const WORD_BANK = [
     hint: "Popular, lively weekend beach resort located in the Ayeyarwady Region.",
     difficulty: "easy"
   },
+  {
+    word: "PATHEIN",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Major Ayeyarwady Delta port city renowned for its handcrafted, brightly painted traditional parasols.",
+    difficulty: "medium"
+  },
+  {
+    word: "KANDAWGYI LAKE",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Serene urban lake in Yangon featuring scenic boardwalks and the gilded Karaweik barge.",
+    difficulty: "easy"
+  },
+  {
+    word: "KALAW",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Charming hill station in Shan State known for pine trees, cool climate, and trekking routes to Inle Lake.",
+    difficulty: "easy"
+  },
+  {
+    word: "KENGTUNG",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Principal town of eastern Shan State known for historic Buddhist monasteries and vibrant tribal markets.",
+    difficulty: "hard"
+  },
+  {
+    word: "THANBODDHAY",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Spectacular pagoda complex in Monywa containing more than 500,000 Buddha images.",
+    difficulty: "hard"
+  },
+  {
+    word: "INWA",
+    category: "places",
+    categoryName: "🏛️ Places & Landmarks",
+    hint: "Historic royal capital (also known as Ava) reached by boat and toured on horse carts.",
+    difficulty: "medium"
+  },
 
   // ==================== 3. CULTURE, TRADITIONS & FESTIVALS ====================
   {
@@ -272,13 +328,6 @@ const WORD_BANK = [
     difficulty: "medium"
   },
   {
-    word: "HOT AIR BALLOON",
-    category: "culture",
-    categoryName: "🌺 Culture & Festivals",
-    hint: "Gigantic homemade paper crafts carrying fireworks launched into the night sky at Taunggyi.",
-    difficulty: "easy"
-  },
-  {
     word: "SHINBYU",
     category: "culture",
     categoryName: "🌺 Culture & Festivals",
@@ -291,6 +340,13 @@ const WORD_BANK = [
     categoryName: "🌺 Culture & Festivals",
     hint: "The classical arched 13-to-16-stringed Burmese harp, considered the national musical instrument.",
     difficulty: "hard"
+  },
+  {
+    word: "KAYAN",
+    category: "culture",
+    categoryName: "🌺 Culture & Festivals",
+    hint: "Tibeto-Burman ethnic group famous for women wearing decorative brass coils around their necks.",
+    difficulty: "medium"
   },
 
   // ==================== 4. NATURE, GEMS & WILDLIFE ====================
@@ -348,6 +404,13 @@ const WORD_BANK = [
     category: "nature",
     categoryName: "💎 Nature, Gems & Wildlife",
     hint: "The fabled 'Valley of Rubies' high in the mountains of Mandalay Region.",
+    difficulty: "easy"
+  },
+  {
+    word: "AYEYARWADY",
+    category: "nature",
+    categoryName: "💎 Nature, Gems & Wildlife",
+    hint: "Myanmar's lifeline and longest river, flowing from the north down into the Andaman Sea.",
     difficulty: "easy"
   },
 
@@ -416,21 +479,28 @@ const WORD_BANK = [
     difficulty: "medium"
   },
   {
-    word: "MILK TEA",
+    word: "CHO SEINT",
     category: "favorites",
     categoryName: "⚽ Football & Gaming Favorites",
-    hint: "Sweet, strong brew of black tea and condensed milk ('Laphet Yay') served in iconic tea shops.",
+    hint: "Classic Myanmar tea order meaning sweet and creamy, mixed with condensed milk and evaporated milk.",
     difficulty: "easy"
   },
   {
-    word: "GUITAR",
+    word: "MYANMAR BEER",
     category: "favorites",
     categoryName: "⚽ Football & Gaming Favorites",
-    hint: "The acoustic instrument played by friends gathering on street corners and during power cuts.",
+    hint: "The country's flagship national lager brand, ubiquitous in beer stations nationwide.",
+    difficulty: "medium"
+  },
+  {
+    word: "DAGON BEER",
+    category: "favorites",
+    categoryName: "⚽ Football & Gaming Favorites",
+    hint: "Popular local commercial lager and extra-strong beer commonly ordered at beer stations.",
     difficulty: "easy"
   },
 
-  // ==================== 6. TECH, INNOVATION & GENERAL ====================
+  // ==================== 6. TECH & MODERN LIFE ====================
   {
     word: "SMARTPHONE",
     category: "tech",
@@ -467,213 +537,24 @@ const WORD_BANK = [
     difficulty: "hard"
   },
   {
-    word: "FIBER INTERNET",
+    word: "MPT",
     category: "tech",
     categoryName: "💻 Tech & Modern Life",
-    hint: "High-speed broadband delivered using optical glass cables to homes and businesses.",
-    difficulty: "medium"
-  },
-  {
-    word: "TAUKKYO",
-    category: "favorites",
-    categoryName: "☕ Drinks & Tea Culture",
-    hint: "Popular Myanmar tea shop drink: strong black tea mixed with milk and sugar (Kyaw Kyaw or Ngwe Htet).",
+    hint: "Myanmar's historical state-owned telecom operator beginning with 09-4 or 09-5 numbers.",
     difficulty: "easy"
   },
   {
-    word: "NGA THOKE THOKE",
-    category: "favorites",
-    categoryName: "🍜 Food & Drink",
-    hint: "Refreshing salad made with sliced fresh fish (Ngathaung or Ngapein), dressed with sesame oil and onions.",
-    difficulty: "medium"
-  },
-  {
-    word: "LONGYI",
-    category: "favorites",
-    categoryName: "👔 Culture & Fashion",
-    hint: "Traditional Myanmar sarong worn by both men and women, tied in various styles.",
-    difficulty: "easy"
-  },
-  {
-    word: "PATHEIN",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Major Delta region city famous for its colorful paper umbrellas (Pathein Pya Daung) and Pagoda.",
-    difficulty: "medium"
-  },
-  {
-    word: "KANDAWGYI Lake",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Beautiful large lake in Yangon featuring a replica Karaweik barge and parkland around Shwedagon.",
-    difficulty: "easy"
-  },
-  {
-    word: "THANDWE",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Town located near Ngapali Beach, serving as the gateway to one of Myanmar's most beautiful coastlines.",
-    difficulty: "medium"
-  },
-  {
-    word: "AYEYARWADY",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Myanmar's longest and most important river, flowing through Mandalay to the Andaman Sea.",
-    difficulty: "easy"
-  },
-  {
-    word: "BAY OF BENGAL",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Large bay on the northeastern side of the Indian Ocean, bordering Myanmar's Rakhine coast.",
-    difficulty: "medium"
-  },
-  {
-    word: "TUZON",
+    word: "WAVE MONEY",
     category: "tech",
-    categoryName: "💻 Tech & Innovation",
-    hint: "The first officially licensed telecom operator in Myanmar, part of the Yatanarpon Teleport group.",
-    difficulty: "hard"
-  },
-  {
-    word: "YANDARAR",
-    category: "tech",
-    categoryName: "💻 Tech & Innovation",
-    hint: "Former Yangon City Development Committee-owned telecom operator, now privatized as Yoma Komitsu.",
-    difficulty: "hard"
-  },
-  {
-    word: "NETLINK",
-    category: "tech",
-    categoryName: "💻 Tech & Innovation",
-    hint: "Early ISP that played a key role in bringing internet access to homes in Myanmar during the transition.",
-    difficulty: "hard"
-  },
-  {
-    word: "MINEDU",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Former capital of the Ava (Inwa) Kingdom, located near Amarapura and the Sagaing Hills.",
-    difficulty: "medium"
-  },
-  {
-    word: "KALAW",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Popular hill station and trekking hub in Shan State, known for its pine forests and colonial charm.",
+    categoryName: "💻 Tech & Modern Life",
+    hint: "The ubiquitous yellow-branded mobile wallet and agent transfer service used across the country.",
     difficulty: "easy"
   },
   {
-    word: "KENGTUNG",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Eastern Shan State city close to Laos and Thailand borders, known for its ethnic diversity and markets.",
-    difficulty: "hard"
-  },
-  {
-    word: "TAUNGGAUNG",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "A notable pagoda located in Monywa, on the western side of the Chindwin River.",
-    difficulty: "hard"
-  },
-  {
-    word: "MAINGMAI",
-    category: "places",
-    categoryName: "🏛️ Places & Travel",
-    hint: "Small village known for its traditional crafts, located near the Thai border in Kayah State.",
-    difficulty: "hard"
-  },
-  {
-    word: "KAYAH",
-    category: "culture",
-    categoryName: "👘 Culture & Ethnicity",
-    hint: "Ethnic minority group from Kayah State, famous for their distinct culture and traditional festivals.",
-    difficulty: "medium"
-  },
-  {
-    word: "POKHRIPAW",
-    category: "culture",
-    categoryName: "👘 Culture & Ethnicity",
-    hint: "The native name for the Kayan people, also known as Padaung, famous for the neck rings.",
-    difficulty: "hard"
-  },
-  {
-    word: "YAZA",
+    word: "KBZPAY",
     category: "tech",
-    categoryName: "💻 Tech & Innovation",
-    hint: "Former government-run network provider that preceded MPT's monopoly on mobile services.",
-    difficulty: "hard"
-  },
-  {
-    word: "IPPC",
-    category: "tech",
-    categoryName: "💻 Tech & Innovation",
-    hint: "Abbreviation for the Myanmar Post and Telecommunications Corporation, the state-owned telecom provider.",
-    difficulty: "hard"
-  },
-  {
-    word: "KAYA",
-    category: "favorites",
-    categoryName: "🍺 Drinks & Nightlife",
-    hint: "Popular local lager beer brewed in Myanmar, often enjoyed with a lime wedge in glass bottles.",
+    categoryName: "💻 Tech & Modern Life",
+    hint: "Widely used mobile wallet application run by Myanmar's largest private commercial bank.",
     difficulty: "easy"
-  },
-  {
-    word: "MYANMA BEER",
-    category: "favorites",
-    categoryName: "🍺 Drinks & Nightlife",
-    hint: "Another well-known Myanmar beer brand produced by a partnership involving Myanmar Economic Holdings Limited.",
-    difficulty: "medium"
-  },
-  {
-    word: "GRAPE WINE",
-    category: "favorites",
-    categoryName: "🍷 Drinks & Nightlife",
-    hint: "Red wine made from grapes grown in the Aythaya vineyards near Taunggyi and Inle Lake.",
-    difficulty: "medium"
-  },
-  {
-    word: "GREEN TEA",
-    category: "favorites",
-    categoryName: "☕ Drinks & Nightlife",
-    hint: "Refreshing unsweetened tea often served warm in traditional tea shops across Myanmar.",
-    difficulty: "easy"
-  },
-  {
-    word: "KYAUT SEIN",
-    category: "food",
-    categoryName: "🍜 Food & Drinks",
-    hint: "Type of Myanmar sticky rice that is chewy and glutinous, often served steamed with palm sugar.",
-    difficulty: "easy"
-  },
-  {
-    word: "HTAMONE",
-    category: "food",
-    categoryName: "🍜 Food & Drinks",
-    hint: "Festive sticky rice dish mixed with ginger, groundnuts, and coconut, traditionally eaten during Thingyan.",
-    difficulty: "medium"
-  },
-  {
-    word: "KYEIKYI",
-    category: "food",
-    categoryName: "🍜 Food & Drinks",
-    hint: "Myanmar savory snack made from glutinous rice and peanuts, shaped into small rolls and deep-fried.",
-    difficulty: "hard"
-  },
-  {
-    word: "KHAO POET",
-    category: "food",
-    categoryName: "🍜 Food & Drinks",
-    hint: "Rice noodle dish from Shan State, similar to Mohinga but with a different broth and topping style.",
-    difficulty: "hard"
-  },
-  {
-    word: "MONG YU",
-    category: "food",
-    categoryName: "🍜 Food & Drinks",
-    hint: "Shan-style noodle soup featuring rice noodles in a spicy, savory broth with pork or chicken.",
-    difficulty: "medium"
   }
-]
+];
